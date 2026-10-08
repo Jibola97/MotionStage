@@ -58,7 +58,7 @@ Keep this terminal running.
 Open a second terminal:
 
 ```bash
-cd ~/Desktop/MotionStage/frontend
+cd frontend
 npm run dev
 ```
 
