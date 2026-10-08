@@ -8,6 +8,12 @@ It extracts human pose, aligns two performances, measures similarity, identifies
   <img src="docs/images/motionstage-hero.png" alt="MotionStage interface" width="100%">
 </p>
 
+## Demo
+
+For a step-by-step end-to-end walkthrough, see the [MotionStage Demo Guide](docs/DEMO.md).
+
+The demo uses your own short reference and comparison videos; sample performance videos are not distributed with this repository.
+
 ## What MotionStage Does
 
 Given a **reference performance** and a **comparison performance**, MotionStage can:
