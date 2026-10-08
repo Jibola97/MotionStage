@@ -1,31 +1,122 @@
 # MotionStage
 
-MotionStage is a full-body movement analysis and character-animation prototype.
+MotionStage is an end-to-end full-body movement-analysis and character-animation system for comparing human performances from video.
 
-It compares a reference performance against a comparison performance, extracts human pose and motion features, measures similarity, identifies where and when the performances diverge, visualises the result in 3D, and can retarget the analysed comparison performance onto an animated Y-Bot character for FBX export.
+It extracts human pose, aligns two performances, measures similarity, identifies where and when movement diverges, visualises the comparison in 3D, and can retarget the analysed motion onto an animated character for FBX export.
 
-## Features
+<p align="center">
+  <img src="docs/images/motionstage-hero.png" alt="MotionStage interface" width="100%">
+</p>
 
-- Upload a reference and comparison performance video
-- Full-body pose tracking
-- Pose smoothing and normalisation
-- Motion-feature extraction
-- Performance alignment
-- Overall similarity scoring
-- Pose similarity
-- Body-position similarity
-- Movement-speed similarity
-- Performance-duration similarity
-- Body-region similarity breakdown
-- Temporal divergence localisation
-- Primary and isolated body-region divergence detection
-- Isolation Forest anomaly scoring
-- Interactive synchronised 3D skeleton viewer
-- Headless Blender character retargeting
-- Animated Y-Bot FBX export
-- Blender project export
-- Persistent analysis state across browser refreshes
-- Pose-quality validation for invalid or low-confidence videos
+## What MotionStage Does
+
+Given a **reference performance** and a **comparison performance**, MotionStage can:
+
+- track and normalise full-body pose
+- extract movement features
+- align performances through time
+- calculate overall and component similarity scores
+- identify regional and temporal movement divergence
+- perform exploratory Isolation Forest anomaly analysis
+- visualise synchronised movement in 3D
+- retarget analysed motion through Blender
+- export animated FBX and Blender project files
+
+## Analysis Outputs
+
+MotionStage reports:
+
+- **Overall similarity**
+- **Pose similarity**
+- **Body-position similarity**
+- **Movement-speed similarity**
+- **Performance-duration similarity**
+- **Body-region similarity**
+- **Temporal divergence windows**
+- **Regional divergence**
+- **Isolation Forest anomaly windows**
+
+## Pipeline
+
+```text
+Reference + Comparison videos
+            ↓
+      Pose extraction
+            ↓
+ Quality validation
+            ↓
+Smoothing + normalisation
+            ↓
+ Feature extraction
+            ↓
+Performance alignment
+            ↓
+ Similarity scoring
+            ↓
+Regional + temporal analysis
+            ↓
+    3D visualisation
+            ↓
+  Blender retargeting
+            ↓
+   Animated FBX export
+
+```
+
+## Technology Stack
+
+| Area | Technologies |
+| --- | --- |
+| Backend | Python, FastAPI |
+| Pose | RTMLib, MediaPipe |
+| Vision | OpenCV |
+| Data | NumPy, pandas, SciPy |
+| Machine learning | scikit-learn, Isolation Forest |
+| Visualisation | Matplotlib, Plotly, 3D pose viewer |
+| Frontend | Next.js, React, TypeScript |
+| Animation | Blender, Python, FBX |
+
+## Example Analysis
+
+MotionStage combines several movement measures into a single analysis while preserving the individual components for inspection.
+
+![MotionStage performance analysis](docs/images/motionstage-analysis.png)
+
+The example above reports an overall similarity score alongside pose, body-position, movement-speed and duration similarity.
+
+## Movement Divergence
+
+Rather than returning only a global score, MotionStage localises movement differences by **body region and time window**.
+
+![MotionStage movement divergence](docs/images/motionstage-divergence.png)
+
+The body-region view identifies the strongest detected divergence while the timeline shows where the relevant windows occur within the comparison performance.
+
+<details>
+<summary><strong>View regional similarity breakdown</strong></summary>
+
+<br>
+
+![MotionStage regional similarity breakdown](docs/images/motionstage-regional.png)
+
+</details>
+
+## Interactive 3D Comparison
+
+MotionStage also generates synchronised 3D pose representations of the reference and comparison performances.
+
+![MotionStage 3D divergence viewer](docs/images/motionstage-pose3d.png)
+
+The viewer follows both performances by relative progress and can highlight the detected divergence region during relevant movement windows.
+
+## Exploratory Anomaly Analysis
+
+An independent Isolation Forest pipeline provides an additional unsupervised signal for unusually different movement windows.
+
+![MotionStage anomaly analysis](docs/images/motionstage-anomaly.png)
+
+The anomaly signal is intentionally presented separately from the deterministic similarity and divergence analysis rather than being treated as a pass/fail judgement.
+
 
 ## Tested Environment
 
@@ -50,7 +141,7 @@ Blender uses its own bundled Python runtime for `bpy` and `mathutils`.
 MotionStage/
 ├── assets/
 │   └── characters/
-│       └── ybot.fbx
+│       └── ybot.fbx                 # local asset, not tracked
 ├── backend/
 │   └── motionstage/
 │       ├── analysis/
@@ -71,7 +162,7 @@ MotionStage/
 ├── frontend/
 │   └── src/
 ├── models/
-│   └── pose_landmarker_full.task
+│   └── pose_landmarker_full.task    # local model, not tracked
 ├── compare_performances.py
 ├── process_performance.py
 ├── requirements.txt
@@ -128,23 +219,15 @@ The `models/` directory is excluded from normal Git tracking, so the model file 
 
 ## Y-Bot Character Asset
 
-The animated-character pipeline expects the Y-Bot FBX asset at:
+The animated-character pipeline expects a local Y-Bot FBX asset at:
 
 ```text
 assets/characters/ybot.fbx
 ```
 
-The character-generation pipeline uses this source model when retargeting MotionStage animation data.
+The Y-Bot FBX is **not distributed with this repository**. Download the Y-Bot character from Adobe Mixamo using your own Adobe account and place the downloaded FBX at the path above.
 
-### Y-Bot asset
-
-The Y-Bot FBX is not distributed with this repository. Download the Y-Bot character from Adobe Mixamo using your own Adobe account and save the downloaded FBX as:
-
-```text
-assets/characters/ybot.fbx
-```
-
-This keeps the MotionStage source code separate from the raw Mixamo character asset.
+MotionStage uses this source model when retargeting analysed performance motion onto the animated character.
 
 ## Blender
 
