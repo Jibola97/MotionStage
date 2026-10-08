@@ -1,0 +1,178 @@
+{
+  "schema": "motionstage.retarget_map.v1",
+  "stage": "19B",
+  "source_rig": "MotionStage_SourceRig",
+  "target_profile": "generic_humanoid_bridge",
+  "notes": [
+    "This mapping is a bridge profile, not a claim of direct UE5 Manny/Quinn compatibility.",
+    "MotionStage currently has no explicit clavicle, neck or hand bones in the source rig.",
+    "Missing target bones will be synthesized in later retarget-rig construction stages.",
+    "The pelvis/root motion remains in-place at this stage."
+  ],
+  "source_to_bridge": {
+    "spine_lower": "pelvis_to_spine",
+    "spine_upper": "spine_to_chest",
+    "head": "chest_to_head",
+    "left_upper_arm": "upperarm_l",
+    "left_forearm": "lowerarm_l",
+    "right_upper_arm": "upperarm_r",
+    "right_forearm": "lowerarm_r",
+    "left_thigh": "thigh_l",
+    "left_shin": "calf_l",
+    "left_foot": "foot_l",
+    "right_thigh": "thigh_r",
+    "right_shin": "calf_r",
+    "right_foot": "foot_r"
+  },
+  "bridge_hierarchy": [
+    {
+      "name": "root",
+      "parent": null,
+      "source": null,
+      "synthetic": true
+    },
+    {
+      "name": "pelvis",
+      "parent": "root",
+      "source": "spine_lower",
+      "synthetic": false
+    },
+    {
+      "name": "spine_01",
+      "parent": "pelvis",
+      "source": "spine_lower",
+      "synthetic": false
+    },
+    {
+      "name": "spine_02",
+      "parent": "spine_01",
+      "source": "spine_upper",
+      "synthetic": false
+    },
+    {
+      "name": "neck_01",
+      "parent": "spine_02",
+      "source": null,
+      "synthetic": true
+    },
+    {
+      "name": "head",
+      "parent": "neck_01",
+      "source": "head",
+      "synthetic": false
+    },
+    {
+      "name": "clavicle_l",
+      "parent": "spine_02",
+      "source": null,
+      "synthetic": true
+    },
+    {
+      "name": "upperarm_l",
+      "parent": "clavicle_l",
+      "source": "left_upper_arm",
+      "synthetic": false
+    },
+    {
+      "name": "lowerarm_l",
+      "parent": "upperarm_l",
+      "source": "left_forearm",
+      "synthetic": false
+    },
+    {
+      "name": "hand_l",
+      "parent": "lowerarm_l",
+      "source": null,
+      "synthetic": true
+    },
+    {
+      "name": "clavicle_r",
+      "parent": "spine_02",
+      "source": null,
+      "synthetic": true
+    },
+    {
+      "name": "upperarm_r",
+      "parent": "clavicle_r",
+      "source": "right_upper_arm",
+      "synthetic": false
+    },
+    {
+      "name": "lowerarm_r",
+      "parent": "upperarm_r",
+      "source": "right_forearm",
+      "synthetic": false
+    },
+    {
+      "name": "hand_r",
+      "parent": "lowerarm_r",
+      "source": null,
+      "synthetic": true
+    },
+    {
+      "name": "thigh_l",
+      "parent": "pelvis",
+      "source": "left_thigh",
+      "synthetic": false
+    },
+    {
+      "name": "calf_l",
+      "parent": "thigh_l",
+      "source": "left_shin",
+      "synthetic": false
+    },
+    {
+      "name": "foot_l",
+      "parent": "calf_l",
+      "source": "left_foot",
+      "synthetic": false
+    },
+    {
+      "name": "thigh_r",
+      "parent": "pelvis",
+      "source": "right_thigh",
+      "synthetic": false
+    },
+    {
+      "name": "calf_r",
+      "parent": "thigh_r",
+      "source": "right_shin",
+      "synthetic": false
+    },
+    {
+      "name": "foot_r",
+      "parent": "calf_r",
+      "source": "right_foot",
+      "synthetic": false
+    }
+  ],
+  "missing_source_bones": {
+    "neck_01": "Synthesise between chest and head",
+    "clavicle_l": "Synthesise between upper chest and left shoulder",
+    "clavicle_r": "Synthesise between upper chest and right shoulder",
+    "hand_l": "Synthesise from left wrist/forearm direction",
+    "hand_r": "Synthesise from right wrist/forearm direction",
+    "root": "Synthetic scene root; source motion remains in-place"
+  },
+  "later_unreal_mapping_hint": {
+    "pelvis": "pelvis",
+    "spine_01": "spine_01",
+    "spine_02": "spine_02",
+    "neck_01": "neck_01",
+    "head": "head",
+    "clavicle_l": "clavicle_l",
+    "upperarm_l": "upperarm_l",
+    "lowerarm_l": "lowerarm_l",
+    "hand_l": "hand_l",
+    "clavicle_r": "clavicle_r",
+    "upperarm_r": "upperarm_r",
+    "lowerarm_r": "lowerarm_r",
+    "hand_r": "hand_r",
+    "thigh_l": "thigh_l",
+    "calf_l": "calf_l",
+    "foot_l": "foot_l",
+    "thigh_r": "thigh_r",
+    "calf_r": "calf_r",
+    "foot_r": "foot_r"
+  }
+}

@@ -1,0 +1,37 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# macOS
+.DS_Store
+
+# Project data
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Generated models
+models/*
+!models/.gitkeep
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+
+# Environment variables
+.env
+.env.local
+.venv_pose3d/
+output/
+
+# Generated MotionStage runtime data
+data/animation/
+data/blender/
+data/comparisons/
+data/ml/
+data/unreal/
+assets/characters/ybot.fbx
