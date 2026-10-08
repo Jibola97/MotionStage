@@ -35,3 +35,5 @@ data/comparisons/
 data/ml/
 data/unreal/
 assets/characters/ybot.fbx
+docs/demo/motionstage-demo-raw.mov
+docs/demo/*.mov

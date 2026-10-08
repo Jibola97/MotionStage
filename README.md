@@ -10,6 +10,10 @@ It extracts human pose, aligns two performances, measures similarity, identifies
 
 ## Demo
 
+[![Watch the MotionStage demo](docs/images/motionstage-hero.png)](docs/demo/motionstage-demo.mp4)
+
+**[Watch the 86-second MotionStage demo →](docs/demo/motionstage-demo.mp4)**
+
 For a step-by-step end-to-end walkthrough, see the [MotionStage Demo Guide](docs/DEMO.md).
 
 The demo uses your own short reference and comparison videos; sample performance videos are not distributed with this repository.
